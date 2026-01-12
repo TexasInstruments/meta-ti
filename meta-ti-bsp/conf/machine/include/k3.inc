@@ -65,11 +65,6 @@ do_image_wic[depends] += "virtual/bootloader:do_deploy"
 
 SERIAL_CONSOLES = "115200;ttyS2 115200;ttyS0"
 
-FALCON_INCLUDE = ""
-FALCON_INCLUDE:ti-falcon = "conf/machine/include/ti-falcon.inc"
-
-require ${FALCON_INCLUDE}
-
 # dm-verity protects the rootfs listed in DM_VERITY_IMAGE; see dynamic-layers/security-layer/conf/include/dm-verity-upstream.inc for what that turns on.
 DM_VERITY_IMAGE ??= ""
 
