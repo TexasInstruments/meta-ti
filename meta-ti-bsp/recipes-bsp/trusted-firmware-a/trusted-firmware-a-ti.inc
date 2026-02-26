@@ -2,10 +2,10 @@
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/trusted-firmware-a:"
 
-PV = "2.13+git"
+PV = "2.14+git"
 
 LIC_FILES_CHKSUM = "file://docs/license.rst;md5=6ed7bace7b0bc63021c6eba7b524039e"
-SRCREV_tfa = "e0c4d3903b382bf34f552af53e6d955fae5283ab"
+SRCREV_tfa = "76500ceaeefcda967d8a1f4e30bb04f9fe0425a2"
 SRC_URI_TRUSTED_FIRMWARE_A = "git://git.trustedfirmware.org/TF-A/trusted-firmware-a.git;protocol=https"
 SRCBRANCH = "master"
 
@@ -30,14 +30,3 @@ EXTRA_OEMAKE += "${@ 'BL32_BASE=' + d.getVar('TFA_K3_BL32_BASE') if d.getVar('TF
 EXTRA_OEMAKE += "${@ 'PRELOADED_BL33_BASE=' + d.getVar('TFA_K3_PRELOADED_BL33') if d.getVar('TFA_K3_PRELOADED_BL33') else ''}"
 EXTRA_OEMAKE += "${@ 'K3_PM_SYSTEM_SUSPEND=' + d.getVar('TFA_K3_SYSTEM_SUSPEND') if d.getVar('TFA_K3_SYSTEM_SUSPEND') else ''}"
 EXTRA_OEMAKE:append:ti-falcon = " PRELOADED_BL33_BASE=0x82000000 K3_HW_CONFIG_BASE=0x88000000"
-
-# LPM support patches for Jacinto platforms (J7200, J742S2, J784S4)
-TFA_JACINTO_LPM_PATCHES = " \
-    file://0001-feat-k3-choose-cluster_start_id-depending-on-the-soc.patch \
-    file://0002-feat-ti-add-message-to-encrypt-tfa-during-suspend.patch \
-    file://0003-feat-k3-handle-suspend-in-case-of-LPM_BOARDCFG_MANAG.patch \
-"
-
-SRC_URI:append:j7200 = " ${TFA_JACINTO_LPM_PATCHES}"
-SRC_URI:append:j742s2 = " ${TFA_JACINTO_LPM_PATCHES}"
-SRC_URI:append:j784s4 = " ${TFA_JACINTO_LPM_PATCHES}"
